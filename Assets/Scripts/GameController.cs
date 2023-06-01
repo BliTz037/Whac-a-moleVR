@@ -22,8 +22,6 @@ public class GameController : MonoBehaviour
 
     public List<GameObject> MolesInScene = new List<GameObject>();
 
-    public Transform playerVR;
-
     private void Start() {
         StartFunction();
     }
