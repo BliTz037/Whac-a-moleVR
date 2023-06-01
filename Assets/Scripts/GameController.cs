@@ -44,6 +44,10 @@ public class GameController : MonoBehaviour
             SpawnPointList.Remove(randomPosition);
 
             GameObject currentMole = Instantiate(molePrefab,randomPosition,Quaternion.identity,transform);
+            Vector3 newRotate = currentMole.transform.eulerAngles;
+            newRotate.y = 90;
+            currentMole.transform.eulerAngles = newRotate;
+
             currentMole.SetActive(true);
             MolesInScene.Add(currentMole);
         } else {
