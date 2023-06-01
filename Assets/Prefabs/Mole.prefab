@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 4031166394648531736}
   - component: {fileID: 4031166394640989386}
   - component: {fileID: 4031166394640989388}
-  - component: {fileID: 4031166394640989389}
+  - component: {fileID: 124046164126121636}
   m_Layer: 0
   m_Name: Mole
   m_TagString: Untagged
@@ -216,7 +216,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4031166394648235896}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.5633278, y: 0.5, z: -0.6264194}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 0.041897688, y: 0.041897688, z: 0.041897688}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -225,7 +225,7 @@ Transform:
   - {fileID: 4031166394648575298}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!95 &4031166394640989386
 Animator:
   serializedVersion: 5
@@ -261,7 +261,7 @@ CapsuleCollider:
   m_Height: 12.88
   m_Direction: 1
   m_Center: {x: 0, y: -6.2, z: 0}
---- !u!114 &4031166394640989389
+--- !u!114 &124046164126121636
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4031166394648235896}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9657bfdc07030614eb058f4a2cab08b6, type: 3}
+  m_Script: {fileID: 11500000, guid: acb2f186251e12245b101c7e199445bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
