@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
     }
 
     public int score = 0;
+    public int life = 3;
     public bool isPlaying = false;
 
     public Transform spawnPoints;
@@ -29,6 +30,7 @@ public class GameController : MonoBehaviour
 
     private void Start() {
         StartFunction();
+        _scoreManager.UpdateLife(life);
     }
 
     void StartFunction() {
@@ -54,7 +56,19 @@ public class GameController : MonoBehaviour
             currentMole.SetActive(true);
             MolesInScene.Add(currentMole);
         } else {
-            //Debug.Log("Max moles in scene");
+            life -= 1;
+            if (life <= 0) {
+                return;
+            }
+            _scoreManager.UpdateLife(life);
+            foreach (GameObject mole in MolesInScene) {
+                Destroy(mole);
+                SpawnPointList.Add(mole.transform.localPosition);
+                // MolesInScene.Remove(mole);
+            }
+            MolesInScene.Clear();
+
+            SoundManager.Instance.PlaySound(SoundManager.Instance.damageSound);
         }
     }
 
