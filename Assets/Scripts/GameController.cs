@@ -14,11 +14,12 @@ public class GameController : MonoBehaviour
     }
 
     public int score = 0;
-    public int life = 3;
+    public int life = 0;
     public bool isPlaying = false;
 
     public Transform spawnPoints;
     public GameObject molePrefab;
+    public GameObject endGameScreen;
 
     public List<Vector3> SpawnPointList = new List<Vector3>();
 
@@ -29,17 +30,25 @@ public class GameController : MonoBehaviour
     private ScoreManager _scoreManager;
 
     private void Start() {
-        StartFunction();
+        // StartFunction();
         _scoreManager.UpdateLife(life);
     }
 
-    void StartFunction() {
+    public void StartFunction() {
+        life = 3;
         score = 0;
+        _scoreManager.UpdateLife(life);
+        _scoreManager.UpdateScore(score);
         foreach (Transform item in spawnPoints) {
             SpawnPointList.Add(item.localPosition);
         }
 
         InvokeRepeating("GetMole",1f,3f);
+    }
+
+    public void EndFunction() {
+        CancelInvoke();
+        WipeClean();
     }
 
     void GetMole() {
@@ -58,18 +67,24 @@ public class GameController : MonoBehaviour
         } else {
             life -= 1;
             if (life <= 0) {
-                return;
+                WipeClean();
+                endGameScreen.SetActive(true);
             }
-            _scoreManager.UpdateLife(life);
-            foreach (GameObject mole in MolesInScene) {
-                Destroy(mole);
-                SpawnPointList.Add(mole.transform.localPosition);
-                // MolesInScene.Remove(mole);
-            }
-            MolesInScene.Clear();
+           WipeClean();
 
-            SoundManager.Instance.PlaySound(SoundManager.Instance.damageSound);
+            // SoundManager.Instance.PlaySound(SoundManager.Instance.damageSound);
         }
+    }
+
+    public void WipeClean() {
+         _scoreManager.UpdateLife(life);
+        foreach (GameObject mole in MolesInScene) {
+            Destroy(mole);
+            SpawnPointList.Add(mole.transform.localPosition);
+            // MolesInScene.Remove(mole);
+        }
+        MolesInScene.Clear();
+        SpawnPointList.Clear();
     }
 
     public void KillMole(GameObject _mole) {
