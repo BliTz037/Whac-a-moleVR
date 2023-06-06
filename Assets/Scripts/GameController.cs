@@ -87,7 +87,7 @@ public class GameController : MonoBehaviour
             }
             EndFunction();
             StartFunction();
-            speedSpawn = speedSpawn * 3f;
+            //speedSpawn = speedSpawn * 3f;
             // SoundManager.Instance.PlaySound(SoundManager.Instance.damageSound);
         }
     }
@@ -104,11 +104,11 @@ public class GameController : MonoBehaviour
     }
 
     public void KillMole(GameObject _mole) {
-        SoundManager.Instance.PlaySound(SoundManager.Instance.hitSound);
         SpawnPointList.Add(_mole.transform.localPosition);
         MolesInScene.Remove(_mole);
         Destroy(_mole);
         score++;
+        SoundManager.Instance.PlaySound(SoundManager.Instance.hitSound);
         if (speedSpawn >= 1f) speedSpawn += increaseSpeed;
         _scoreManager.UpdateScore(score);
     }
