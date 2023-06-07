@@ -16,10 +16,13 @@ public class GameController : MonoBehaviour
     public int score = 0;
     public int life = 0;
     public bool isPlaying = false;
+    public float speedSpawn = 3f;
+    public float increaseSpeed = 0.2f;
 
     public Transform spawnPoints;
     public GameObject molePrefab;
     public GameObject endGameScreen;
+    public GameObject currentGameScreen;
 
     public List<Vector3> SpawnPointList = new List<Vector3>();
 
@@ -29,24 +32,34 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private ScoreManager _scoreManager;
 
-    private void Start() {
-        // StartFunction();
+    public void Start() {
         _scoreManager.UpdateLife(life);
+        life = 3;
+        score = 0;
+        speedSpawn = 3f;
+    }
+
+    public void resetGame() {
+        _scoreManager.UpdateLife(life);
+        life = 3;
+        speedSpawn = 3f;
+        score = 0;
+        StartFunction();
     }
 
     public void StartFunction() {
-        life = 3;
-        score = 0;
         _scoreManager.UpdateLife(life);
         _scoreManager.UpdateScore(score);
         foreach (Transform item in spawnPoints) {
             SpawnPointList.Add(item.localPosition);
         }
 
-        InvokeRepeating("GetMole",1f,3f);
+        InvokeRepeating("GetMole",1f,speedSpawn);
     }
 
     public void EndFunction() {
+        _scoreManager.UpdateLife(life);
+        _scoreManager.UpdateScore(score);
         CancelInvoke();
         WipeClean();
     }
@@ -67,11 +80,14 @@ public class GameController : MonoBehaviour
         } else {
             life -= 1;
             if (life <= 0) {
-                WipeClean();
+                EndFunction();
                 endGameScreen.SetActive(true);
+                currentGameScreen.SetActive(false);
+                
             }
-           WipeClean();
-
+            EndFunction();
+            StartFunction();
+            speedSpawn = speedSpawn * 3f;
             // SoundManager.Instance.PlaySound(SoundManager.Instance.damageSound);
         }
     }
@@ -93,6 +109,7 @@ public class GameController : MonoBehaviour
         MolesInScene.Remove(_mole);
         Destroy(_mole);
         score++;
+        if (speedSpawn >= 1f) speedSpawn += increaseSpeed;
         _scoreManager.UpdateScore(score);
     }
 }
