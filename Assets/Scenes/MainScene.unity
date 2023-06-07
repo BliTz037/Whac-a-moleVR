@@ -3638,6 +3638,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1455492765}
+  scoreGameOverText: {fileID: 1527784800}
   lifeText: {fileID: 1249652939}
 --- !u!4 &632329590
 Transform:
@@ -9736,9 +9737,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1347685885}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: EndFunction
+      - m_Target: {fileID: 1938916354}
+        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
+        m_MethodName: ReloadCurrentScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
